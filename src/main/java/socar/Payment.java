@@ -12,21 +12,20 @@ public class Payment  {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long payId;
-
     private Long rsvId;
-
     private Long carId;
-
     private String status;
 
 
     @PostPersist
     public void onPostPersist(){
+        // 결재 승인나면 paymentApproved 시작 
         PaymentApproved paymentApproved = new PaymentApproved();
         BeanUtils.copyProperties(this, paymentApproved);
         paymentApproved.publishAfterCommit();
 
     }
+    
     @PostUpdate
     public void onPostUpdate(){
         PaymentCancelled paymentCancelled = new PaymentCancelled();
