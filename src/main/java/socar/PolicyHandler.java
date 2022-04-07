@@ -20,7 +20,7 @@ public class PolicyHandler{
 
         if(!reservationCancelRequested.validate()) return;
 
-        System.out.println("\n\n##### listener CancelPayment : " + reservationCancelRequested.toJson() + "\n\n");
+        System.out.println("\n\n##### 결제 취소 : " + reservationCancelRequested.toJson() + "\n\n");
 
 
         
