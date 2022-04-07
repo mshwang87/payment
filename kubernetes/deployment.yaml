@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: payment
+  namespace: socar
   labels:
     app: payment
 spec:
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: username/payment:latest
+          image: 979050235289.dkr.ecr.ap-southeast-2.amazonaws.com/user06-payment:1.0
           ports:
             - containerPort: 8080
           readinessProbe:
