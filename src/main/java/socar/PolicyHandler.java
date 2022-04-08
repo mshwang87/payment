@@ -1,8 +1,7 @@
 package socar;
 
 import socar.config.kafka.KafkaProcessor;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -23,11 +22,16 @@ public class PolicyHandler{
         System.out.println("\n\n##### 결제 취소 : " + reservationCancelRequested.toJson() + "\n\n");
 
 
-        
+        // 취소시킬 payId 추출
+        long payId = reservationCancelRequested.getPayId(); // 취소시킬 payId
 
-        // Sample Logic //
-        // Payment payment = new Payment();
-        // paymentRepository.save(payment);
+        Optional<Payment> res = paymentRepository.findById(payId);
+        Payment payment = res.get();
+
+        payment.setStatus("cancelled"); // 취소 상태로 
+
+        // DB Update
+        paymentRepository.save(payment);
 
     }
 

@@ -28,6 +28,7 @@ public class Payment  {
     
     @PostUpdate
     public void onPostUpdate(){
+        // 결재 취소나면 paymentCancelled 시작 
         PaymentCancelled paymentCancelled = new PaymentCancelled();
         BeanUtils.copyProperties(this, paymentCancelled);
         paymentCancelled.publishAfterCommit();
